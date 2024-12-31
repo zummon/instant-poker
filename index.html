@@ -1,158 +1,18 @@
+<!doctype html>
 <html>
-<head>
-	<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="https://cdn.tailwindcss.com/3.4.5"></script>
-	<script>
-document.addEventListener("alpine:init", () => {
-	Alpine.data("core", () => {
-		let deck = [
-			["A", "♠", "♠", true],
-			[2, "♠", "♠\n\n♠", true],
-			[3, "♠", "♠\n♠\n♠", true],
-			[4, "♠", "♠ ♠\n\n♠ ♠", true],
-			[5, "♠", "♠ ♠\n♠\n♠ ♠", true],
-			[6, "♠", "♠ ♠\n♠ ♠\n♠ ♠", true],
-			[7, "♠", "♠ ♠\n♠\n♠ ♠\n♠ ♠", true],
-			[8, "♠", "♠ ♠\n♠\n♠ ♠\n♠\n♠ ♠", true],
-			[9, "♠", "♠ ♠\n♠ ♠\n♠\n♠ ♠\n♠ ♠", true],
-			[10, "♠", "♠ ♠\n♠\n♠ ♠\n♠ ♠\n♠\n♠ ♠", true],
-			["J", "♠", "♜", true],
-			["Q", "♠", "♛", true],
-			["K", "♠", "♚", true],
-			["A", "❤️", "❤️"],
-			[2, "❤️", "❤️\n\n❤️"],
-			[3, "❤️", "❤️\n❤️\n❤️"],
-			[4, "❤️", "❤️ ❤️\n\n❤️ ❤️"],
-			[5, "❤️", "❤️ ❤️\n❤️\n❤️ ❤️"],
-			[6, "❤️", "❤️ ❤️\n❤️ ❤️\n❤️ ❤️"],
-			[7, "❤️", "❤️ ❤️\n❤️\n❤️ ❤️\n❤️ ❤️"],
-			[8, "❤️", "❤️ ❤️\n❤️\n❤️ ❤️\n❤️\n❤️ ❤️"],
-			[9, "❤️", "❤️ ❤️\n❤️ ❤️\n❤️\n❤️ ❤️\n❤️ ❤️"],
-			[10, "❤️", "❤️ ❤️\n❤️\n❤️ ❤️\n❤️ ❤️\n❤️\n❤️ ❤️"],
-			["J", "❤️", "♜"],
-			["Q", "❤️", "♛"],
-			["K", "❤️", "♚"],
-			["A", "♣", "♣", true],
-			[2, "♣", "♣\n\n♣", true],
-			[3, "♣", "♣\n♣\n♣", true],
-			[4, "♣", "♣ ♣\n\n♣ ♣", true],
-			[5, "♣", "♣ ♣\n♣\n♣ ♣", true],
-			[6, "♣", "♣ ♣\n♣ ♣\n♣ ♣", true],
-			[7, "♣", "♣ ♣\n♣\n♣ ♣\n♣ ♣", true],
-			[8, "♣", "♣ ♣\n♣\n♣ ♣\n♣\n♣ ♣", true],
-			[9, "♣", "♣ ♣\n♣ ♣\n♣\n♣ ♣\n♣ ♣", true],
-			[10, "♣", "♣ ♣\n♣\n♣ ♣\n♣ ♣\n♣\n♣ ♣", true],
-			["J", "♣", "♜", true],
-			["Q", "♣", "♛", true],
-			["K", "♣", "♚", true],
-			["A", "♦️", "♦️"],
-			[2, "♦️", "♦️\n\n♦️"],
-			[3, "♦️", "♦️\n♦️\n♦️"],
-			[4, "♦️", "♦️ ♦️\n\n♦️ ♦️"],
-			[5, "♦️", "♦️ ♦️\n♦️\n♦️ ♦️"],
-			[6, "♦️", "♦️ ♦️\n♦️ ♦️\n♦️ ♦️"],
-			[7, "♦️", "♦️ ♦️\n♦️\n♦️ ♦️\n♦️ ♦️"],
-			[8, "♦️", "♦️ ♦️\n♦️\n♦️ ♦️\n♦️\n♦️ ♦️"],
-			[9, "♦️", "♦️ ♦️\n♦️ ♦️\n♦️\n♦️ ♦️\n♦️ ♦️"],
-			[10, "♦️", "♦️ ♦️\n♦️\n♦️ ♦️\n♦️ ♦️\n♦️\n♦️ ♦️"],
-			["J", "♦️", "♜"],
-			["Q", "♦️", "♛"],
-			["K", "♦️", "♚"]
-		];
-
-		return {
-			deck,
-			players: [[], [], []],
-			host: [],
-			getter() {
-				let randomNumber = Math.floor(Math.random() * this.deck.length);
-				let [card] = this.deck.splice(randomNumber, 1);
-				return card;
-			},
-			init() {
-				this.host = [this.getter(), this.getter(), this.getter()];
-				this.players = this.players.map(() => [this.getter(), this.getter()]);
-			}
-		};
-	});
-});
-	</script>
-</head>
-
-<body class="bg-[#233a44]">
-	<div class="flex flex-col h-dvh justify-center items-center gap-4" x-data="core">
-
-		<button class="text-white text-3xl rounded-lg bg-[#bf8659] px-2 py-1" @click="()=>{ deck = [...deck, ...host, ...players.flatMap(elements => elements)]; host = []; players = players.map(() => []); }">Empty</button>
-
-		<div class="flex flex-wrap gap-2 p-2 justify-center cursor-default leading-none text-center text-xl">
-			<template x-for="(card, index) in host">
-				<div :class="`bg-white flex overflow-clip h-36 rounded ${card[3] ? '' : 'text-red-600'}`">
-					<div class="pl-1">
-						<span class="font-bold" x-text="card[0]"></span><br>
-						<span class="" x-text="card[1]"></span>
-					</div>
-					<div class="w-16 flex items-center justify-center">
-						<span :class="card[2].length === 1 ? 'text-5xl' : 'whitespace-pre'" x-text="card[2]">
-
-						</span>
-					</div>
-					<div class="pr-1 pb-1 flex flex-col items-center justify-end">
-						<span class="" x-text="card[1]"></span>
-						<span class="font-bold" x-text="card[0]"></span>
-					</div>
-				</div>
-			</template>
-			<template x-if="host.length < 5">
-
-				<button class="text-4xl font-bold text-white w-16 border rounded border-dashed" @click="()=>{ host.push(getter()); }">+</button>
-
-			</template>
-		</div>
-
-		<div class="flex flex-wrap gap-4 p-2 justify-center">
-			<template x-for="(player, index) in players">
-
-				<div class="rounded bg-[#00796b]">
-					<button class="pl-2 text-white" @click="() => { deck = [...deck, ...player.map(element => element)]; players.splice(index, 1); }">PLAYER<span x-text="index + 1"></span>
-					</button>
-					<div class="flex gap-1 leading-none text-center text-xl">
-						<template x-for="(card, indexSec) in player">
-							<div :class="`bg-white flex overflow-clip h-36 rounded cursor-default ${card[3] ? '' : 'text-red-600'}`">
-								<div class="pl-1">
-									<span class="font-bold" x-text="card[0]"></span><br>
-									<span class="" x-text="card[1]"></span>
-								</div>
-								<div class="w-16 flex items-center justify-center">
-									<span :class="card[2].length === 1 ? 'text-5xl' : 'whitespace-pre'" x-text="card[2]"></span>
-								</div>
-								<div class="pr-1 pb-1 flex flex-col items-center justify-end">
-									<span class="" x-text="card[1]"></span>
-									<span class="font-bold" x-text="card[0]"></span>
-								</div>
-							</div>
-						</template>
-						<template x-if="player.length < 2">
-							<button class="text-4xl font-bold text-white w-16 border rounded border-dashed" @click="() => { player.push(getter()); }">+</button>
-						</template>
-
-					</div>
-				</div>
-			</template>
-			<template x-if="players.length < 8">
-
-				<button class="text-4xl font-bold text-white w-32 border rounded border-dashed" @click="()=>{ players.push([]); }">+</button>
-
-			</template>
-		</div>
-
-		<div class="text-lime-600 p-2 text-center">
-			Made by Teerapat Anantarattanachai<br />
-			Something breaks, shows incorrect result. Let me know
-		</div>
-
-	</div>
-</body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>instant Poker</title>
+  </head>
+  <body class="bg-neutral-900 text-white">
+    <div class="flex flex-col h-svh justify-center items-center gap-4">
+      <div class="" id="root"></div>
+      <div class="text-neutral-400 p-2 text-center">
+        Made by Teerapat Anantarattanachai<br />
+        Something breaks, shows incorrect result. Let me know
+      </div>
+    </div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
-	

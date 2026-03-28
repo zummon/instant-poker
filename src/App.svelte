@@ -71,7 +71,7 @@
 
 </script>
 
-<button class="text-white text-3xl rounded-lg bg-[#bf8659] px-2 py-1" onclick={() => { 
+<button class="text-white text-3xl rounded-lg bg-[#bf8659] px-2 py-1 cursor-pointer" onclick={() => { 
 	deck = [...deck, ...host, ...players.flatMap(elements => elements)]
 	host = []
 	players = players.map(() => [])
@@ -96,7 +96,7 @@
 		</div>
 	{/each}
 	{#if host.length < 5}
-		<button class="text-4xl font-bold text-white w-16 border rounded border-dashed" onclick={() => { 
+		<button class="text-4xl font-bold text-white w-16 border rounded border-dashed cursor-pointer" onclick={() => { 
 			host.push( getter() )
 		}}>+</button>
 	{/if}
@@ -105,7 +105,7 @@
 <div class="flex flex-wrap gap-4 p-2 justify-center">
 	{#each players as player, index (index)}
 		<div class="rounded bg-[#00796b]">
-			<button class="pl-2 text-white" onclick={() => {
+			<button class="pl-2 text-white cursor-pointer" onclick={() => {
 				deck = [ ...deck, ...player.map(element => element) ]
 				players.splice(index, 1)
 			}}>PLAYER<span>{index + 1}</span>
@@ -127,7 +127,7 @@
 					</div>
 				{/each}
 				{#if player.length < 2}
-					<button class="text-4xl font-bold text-white w-16 border rounded border-dashed" onclick={() => { 
+					<button class="text-4xl font-bold text-white w-16 border rounded border-dashed cursor-pointer" onclick={() => { 
 						players[index].push( getter() )
 					}}>+</button>
 				{/if}
@@ -135,7 +135,7 @@
 		</div>
 	{/each}
 	{#if players.length < 8}
-		<button class="text-4xl font-bold text-white w-32 border rounded border-dashed" onclick={() => { 
+		<button class="text-4xl font-bold text-white w-32 border rounded border-dashed cursor-pointer" onclick={() => { 
 			players.push( [] )
 		}}>+</button>
 	{/if}
